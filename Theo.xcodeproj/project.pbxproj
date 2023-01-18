@@ -11,6 +11,11 @@
 		5502C92829725EDB009E9214 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5502C92729725EDB009E9214 /* ContentView.swift */; };
 		5502C92A29725EDC009E9214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5502C92929725EDC009E9214 /* Assets.xcassets */; };
 		5502C92D29725EDC009E9214 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5502C92C29725EDC009E9214 /* Preview Assets.xcassets */; };
+		5502C934297261F0009E9214 /* ARViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5502C933297261F0009E9214 /* ARViewContainer.swift */; };
+		5502C9362973DD20009E9214 /* SkeletonJoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5502C9352973DD20009E9214 /* SkeletonJoint.swift */; };
+		5502C9382973DD7A009E9214 /* SkeletonBone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5502C9372973DD7A009E9214 /* SkeletonBone.swift */; };
+		5502C93A2973DE90009E9214 /* Bones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5502C9392973DE90009E9214 /* Bones.swift */; };
+		550E15642975066F0039253B /* BodySkeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550E15632975066F0039253B /* BodySkeleton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		5502C92729725EDB009E9214 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5502C92929725EDC009E9214 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5502C92C29725EDC009E9214 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5502C933297261F0009E9214 /* ARViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer.swift; sourceTree = "<group>"; };
+		5502C9352973DD20009E9214 /* SkeletonJoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonJoint.swift; sourceTree = "<group>"; };
+		5502C9372973DD7A009E9214 /* SkeletonBone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonBone.swift; sourceTree = "<group>"; };
+		5502C9392973DE90009E9214 /* Bones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bones.swift; sourceTree = "<group>"; };
+		550E15632975066F0039253B /* BodySkeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodySkeleton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +63,11 @@
 			children = (
 				5502C92529725EDB009E9214 /* TheoApp.swift */,
 				5502C92729725EDB009E9214 /* ContentView.swift */,
+				5502C933297261F0009E9214 /* ARViewContainer.swift */,
+				5502C9352973DD20009E9214 /* SkeletonJoint.swift */,
+				5502C9372973DD7A009E9214 /* SkeletonBone.swift */,
+				5502C9392973DE90009E9214 /* Bones.swift */,
+				550E15632975066F0039253B /* BodySkeleton.swift */,
 				5502C92929725EDC009E9214 /* Assets.xcassets */,
 				5502C92B29725EDC009E9214 /* Preview Content */,
 			);
@@ -137,8 +152,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550E15642975066F0039253B /* BodySkeleton.swift in Sources */,
 				5502C92829725EDB009E9214 /* ContentView.swift in Sources */,
+				5502C93A2973DE90009E9214 /* Bones.swift in Sources */,
+				5502C9382973DD7A009E9214 /* SkeletonBone.swift in Sources */,
 				5502C92629725EDB009E9214 /* TheoApp.swift in Sources */,
+				5502C934297261F0009E9214 /* ARViewContainer.swift in Sources */,
+				5502C9362973DD20009E9214 /* SkeletonJoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +290,7 @@
 				DEVELOPMENT_TEAM = UM2WVG3GG5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs access to the camera to enable AR functionality";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -299,6 +320,7 @@
 				DEVELOPMENT_TEAM = UM2WVG3GG5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs access to the camera to enable AR functionality";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
