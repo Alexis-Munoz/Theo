@@ -1,1 +1,3 @@
-# PROJECT-THEO
+# Theo
+
+A description of this package.
