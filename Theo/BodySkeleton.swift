@@ -8,6 +8,7 @@
 import Foundation
 import RealityKit
 import ARKit
+import CreateML
 
 class BodySkeleton: Entity {
     var joints: [String: Entity] = [:]
@@ -19,8 +20,6 @@ class BodySkeleton: Entity {
         for jointName in ARSkeletonDefinition.defaultBody3D.jointNames {
             var jointRadius: Float = 0.05
             var jointColor: UIColor = .green
-            // Set color and size based on specific jointName
-            // NOTE: Green joints are actively tracked by ARKit. Yellow joints are not tracked. They just follow the motion of the closest green parent.
             switch jointName {
             case "neck_1_joint", "neck_2_joint", "neck_3_joint", "neck_4_joint", "head_joint",
                 "left_shoulder_1_joint", "right_shoulder_1_joint":
