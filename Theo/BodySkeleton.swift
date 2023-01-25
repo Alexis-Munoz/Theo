@@ -9,6 +9,7 @@ import Foundation
 import RealityKit
 import ARKit
 import CreateML
+import SwiftUI
 
 class BodySkeleton: Entity {
     var joints: [String: Entity] = [:]
@@ -71,6 +72,8 @@ class BodySkeleton: Entity {
                 let jointEntity0ffsetFromRoot = simd_make_float3(jointEntityTransform.columns.3) // relative to root
                 jointEntity.position = jointEntity0ffsetFromRoot + rootPosition // relative to world reference frame
                 jointEntity.orientation = Transform(matrix: jointEntityTransform).rotation
+                
+                print("Joint: \(jointName) position: \(jointEntity.position)")
             }
         }
         

@@ -10,7 +10,7 @@ import ARKit
 import RealityKit
 
 private var bodySkeleton: BodySkeleton?
-private let bodySkeletonAnchor = AnchorEntity ()
+private let bodySkeletonAnchor = AnchorEntity()
 
 struct ARViewContainer: UIViewRepresentable {
     typealias UIViewType = ARView
