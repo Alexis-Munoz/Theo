@@ -8,7 +8,8 @@
 import Foundation
 import RealityKit
 import ARKit
-import CreateML
+import CoreML
+import CreateMLComponents
 import SwiftUI
 
 class BodySkeleton: Entity {
@@ -65,18 +66,69 @@ class BodySkeleton: Entity {
     }
     
     func update (with bodyAnchor: ARBodyAnchor) {
+        var i = 0;
         let rootPosition = simd_make_float3 (bodyAnchor.transform.columns.3)
         for jointName in ARSkeletonDefinition.defaultBody3D.jointNames {
             if let jointEntity = joints[jointName ],
                let jointEntityTransform = bodyAnchor.skeleton.modelTransform(for: ARSkeleton.JointName (rawValue: jointName)) {
-                let jointEntity0ffsetFromRoot = simd_make_float3(jointEntityTransform.columns.3) // relative to root
-                jointEntity.position = jointEntity0ffsetFromRoot + rootPosition // relative to world reference frame
+                let jointEntityOffsetFromRoot = simd_make_float3(jointEntityTransform.columns.3) // relative to root
+                jointEntity.position = jointEntityOffsetFromRoot + rootPosition // relative to world reference frame
                 jointEntity.orientation = Transform(matrix: jointEntityTransform).rotation
                 
-                print("Joint: \(jointName) position: \(jointEntity.position)")
+                if i % 1000000 == 0{
+                    for jointName in ARSkeletonDefinition.defaultBody3D.jointNames {
+                        struct currentJoint: Codable {
+                            var name: String
+                            var position: SIMD3<Float>
+                        }
+                        
+                        let thisJoint = currentJoint(name: jointName, position: jointEntity.position)
+                        
+                        do {
+                            let encoder = JSONEncoder()
+                            encoder.outputFormatting = .prettyPrinted
+                            
+                            let data = try encoder.encode(thisJoint)
+                            
+                            let str = String(data: data, encoding: .utf8)!
+                            
+                            print(str)
+                            
+//                            let fileURL = URL(fileURLWithPath: ".")
+//                            let fileManager = FileManager.default
+                            
+                        }
+                        catch {
+                            print("An error occured while encoding the JSON object: \(error)")
+                        }
+
+//                            if fileManager.fileExists(atPath: fileURL.deletingLastPathComponent().path) {
+//                                // Directory exists, proceed with creating file
+//                                if fileManager.fileExists(atPath: fileURL.path) {
+//                                    do {
+//                                        try fileManager.removeItem(at: fileURL)
+//                                        fileManager.createFile(atPath: fileURL.path, contents: str.data(using: .utf8))
+//                                    }catch {
+//                                        print("Error removing or creating file: \(error)")
+//                                    }
+//                                } else {
+//                                    do {
+//                                        try str.write(to: fileURL, atomically: true, encoding: .utf8)
+//                                    } catch {
+//                                        print("Error writing to file: \(error)")
+//                                    }
+//                                }
+//                            } else {
+//                                print("Directory does not exist.")
+//                            }
+                    }
+                }
+                print("----------------------------------------------------------------------")
+                i = i + 1
             }
         }
         
+//        print("left_shoulder_1_joint: position: \(joints["left_shoulder_1_joint"].position) \nleft_arm_joint: position: \(joints["left_arm_joint"].position) \nleft_forearm_joint: position: \(joints["left_forearm_joint"].position) \nright_shoulder_1_joint: position: \(joints["right_shoulder_1_joint"].position) \nright_arm_joint: position: \(joints["right_arm_joint"].position) \nright_forearm_joint: position: \(joints["right_forearm_joint"].position) \nspine_7_joint: position: \(joints["spine_7_joint"].position) \nspine_7_joint: position: \(joints["spine_7_joint"].position) \nneck_1_joint: position: \(joints["neck_1_joint"].position) \nspine_7_joint: position: \(joints["spine_7_joint"].position) \nspine_6_joint: position: \(joints["spine_6_joint"].position) \nhips_joint: position: \(joints["hips_joint"].position) \nleft_upLeg_joint: position: \(joints["left_upLeg_joint"].position) \nleft_leg_joint: position: \(joints["left_leg_joint"].position) \nhips_joint: position: \(joints["hips_joint"].position) \nright_upLeg_joint: position: \(joints["right_upLeg_joint"].position) \nright_leg_joint: position: \(joints["right_leg_joint"].position) \nleft_hand_joint: position: \(joints["left_hand_joint"].position) \nright_hand_joint: position: \(joints["right_hand_joint"].position) \nspine_5_joint: position: \(joints["spine_5_joint"].position) \nleft_foot_joint: position: \(joints["left_foot_joint"].position) \nright_foot_joint: position: \(joints["right_foot_joint"].position) \n")
         for bone in Bones.allCases {
             let boneName = bone.name
             guard let entity = bones [boneName],

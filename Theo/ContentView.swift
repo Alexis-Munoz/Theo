@@ -25,17 +25,27 @@ struct SaveButton: View {
         HStack {
             Spacer()
             Button(action: {
-                // Code to save current joint positions to a json file
-                
+                for (jointName, jointEntity) in BodySkeleton().joints {
+                    print("Joint Name: \(jointName)")
+                    print("Joint Position: \(jointEntity.position)")
+                }
+            }) {
+                Label("Emergency crash button", systemImage: "square.and.arrow.up")
+            }
+            
+//            Button(action: {
+//                // Code to save current joint positions to a json file
+//
 //                let encoder = JSONEncoder()
-//                                let jsonData = try encoder.encode(joints)
+//                let jsonData = try encoder.encode(BodySkeleton().joints)
 //                                let documentsUrl = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 //                                let fileUrl = documentsUrl.appendingPathComponent("joints.json")
 //                                try jsonData.write(to: fileUrl)
 //                                print("Joint positions saved to: \(fileUrl.path)")
-            }) {
-                Label("Save current joint positions to a json file", systemImage: "square.and.arrow.up")
-            }
+//            }) {
+//                Label("Save current joint positions to a json file", systemImage: "square.and.arrow.up")
+//            }
+            
             .foregroundColor(.white)
             .padding()
         }
