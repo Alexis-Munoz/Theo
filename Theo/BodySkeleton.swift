@@ -75,14 +75,16 @@ class BodySkeleton: Entity {
                 jointEntity.position = jointEntityOffsetFromRoot + rootPosition // relative to world reference frame
                 jointEntity.orientation = Transform(matrix: jointEntityTransform).rotation
                 
-                if i % 1000000 == 0{
+                if i % 480 == 0{
                     for jointName in ARSkeletonDefinition.defaultBody3D.jointNames {
                         struct currentJoint: Codable {
                             var name: String
-                            var position: SIMD3<Float>
+                            var positionx: Float
+                            var positiony: Float
+                            var positionz: Float
                         }
                         
-                        let thisJoint = currentJoint(name: jointName, position: jointEntity.position)
+                        let thisJoint = currentJoint(name: jointName, positionx: jointEntity.position.x, positiony: jointEntity.position.y, positionz: jointEntity.position.z)
                         
                         do {
                             let encoder = JSONEncoder()
@@ -92,7 +94,7 @@ class BodySkeleton: Entity {
                             
                             let str = String(data: data, encoding: .utf8)!
                             
-                            print(str)
+                            print(str + ",")
                             
 //                            let fileURL = URL(fileURLWithPath: ".")
 //                            let fileManager = FileManager.default
@@ -101,34 +103,14 @@ class BodySkeleton: Entity {
                         catch {
                             print("An error occured while encoding the JSON object: \(error)")
                         }
-
-//                            if fileManager.fileExists(atPath: fileURL.deletingLastPathComponent().path) {
-//                                // Directory exists, proceed with creating file
-//                                if fileManager.fileExists(atPath: fileURL.path) {
-//                                    do {
-//                                        try fileManager.removeItem(at: fileURL)
-//                                        fileManager.createFile(atPath: fileURL.path, contents: str.data(using: .utf8))
-//                                    }catch {
-//                                        print("Error removing or creating file: \(error)")
-//                                    }
-//                                } else {
-//                                    do {
-//                                        try str.write(to: fileURL, atomically: true, encoding: .utf8)
-//                                    } catch {
-//                                        print("Error writing to file: \(error)")
-//                                    }
-//                                }
-//                            } else {
-//                                print("Directory does not exist.")
-//                            }
                     }
+                    print("----------------------------------------------------------------------")
                 }
-                print("----------------------------------------------------------------------")
                 i = i + 1
             }
         }
         
-//        print("left_shoulder_1_joint: position: \(joints["left_shoulder_1_joint"].position) \nleft_arm_joint: position: \(joints["left_arm_joint"].position) \nleft_forearm_joint: position: \(joints["left_forearm_joint"].position) \nright_shoulder_1_joint: position: \(joints["right_shoulder_1_joint"].position) \nright_arm_joint: position: \(joints["right_arm_joint"].position) \nright_forearm_joint: position: \(joints["right_forearm_joint"].position) \nspine_7_joint: position: \(joints["spine_7_joint"].position) \nspine_7_joint: position: \(joints["spine_7_joint"].position) \nneck_1_joint: position: \(joints["neck_1_joint"].position) \nspine_7_joint: position: \(joints["spine_7_joint"].position) \nspine_6_joint: position: \(joints["spine_6_joint"].position) \nhips_joint: position: \(joints["hips_joint"].position) \nleft_upLeg_joint: position: \(joints["left_upLeg_joint"].position) \nleft_leg_joint: position: \(joints["left_leg_joint"].position) \nhips_joint: position: \(joints["hips_joint"].position) \nright_upLeg_joint: position: \(joints["right_upLeg_joint"].position) \nright_leg_joint: position: \(joints["right_leg_joint"].position) \nleft_hand_joint: position: \(joints["left_hand_joint"].position) \nright_hand_joint: position: \(joints["right_hand_joint"].position) \nspine_5_joint: position: \(joints["spine_5_joint"].position) \nleft_foot_joint: position: \(joints["left_foot_joint"].position) \nright_foot_joint: position: \(joints["right_foot_joint"].position) \n")
+        
         for bone in Bones.allCases {
             let boneName = bone.name
             guard let entity = bones [boneName],
